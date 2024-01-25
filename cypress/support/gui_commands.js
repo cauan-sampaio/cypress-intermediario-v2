@@ -24,4 +24,25 @@ Cypress.Commands.add('login', (
    }
     Logout()
   })
+
+  Cypress.Commands.add('Createprj', () => {
+
+    const Createprj = () => {
+      cy.get('[href="/projects/new"] > .blank-state-body > .blank-state-title').click()
+      cy.get('#blank-project-name > .project-name > #project_name').type('Meu projeto')
+      cy.get('#blank-project-pane > #new_project > .visibility-level-setting > :nth-child(3) > #project_visibility_level_20').click()
+      cy.get('#project_initialize_with_readme').click()
+      cy.get('#blank-project-pane > #new_project > .btn-success').click()
+    }
+    Createprj();
+  })
+
+  Cypress.Commands.add('gui_createProject', project => {
+    cy.visit('/projects/new')
+  
+    cy.get('#project_name').type(project.name)
+    cy.get('#project_description').type(project.description)
+    cy.get('.qa-initialize-with-readme-checkbox').check()
+    cy.contains('Create project').click()
+  })
   
